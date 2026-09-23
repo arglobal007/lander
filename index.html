@@ -277,11 +277,11 @@
   <div id="loginModal" class="modal-overlay" onclick="if(event.target.id==='loginModal') closeModal()">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal()">&times;</button>
-      <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 1rem; color: #0f172a;">ম্যানেজমেন্ট লগইন</h3>
-      <form onsubmit="event.preventDefault(); alert('লগইন সফল হয়েছে! ড্যাশবোর্ডে রিডাইরেক্ট হচ্ছে...');">
-        <input type="text" class="form-input" placeholder="ইমেইল বা ইউজারনেম" required value="admin@example.com">
-        <input type="password" class="form-input" placeholder="পাসওয়ার্ড" required value="••••••••">
-        <button type="submit" class="form-submit">লগইন করুন</button>
+      <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem; color: #0f172a;">ম্যানেজমেন্ট লগইন</h3>
+      <form onsubmit="handleAdminLogin(event)">
+        <input type="text" id="loginEmail" class="form-input" placeholder="ইমেইল বা ইউজারনেম" required value="rahadverifyfbid@gmail.com">
+        <input type="password" id="loginPass" class="form-input" placeholder="পাসওয়ার্ড" required value="aminur1234">
+        <button type="submit" id="loginBtn" class="form-submit">ড্যাশবোর্ডে প্রবেশ করুন</button>
       </form>
     </div>
   </div>
@@ -289,6 +289,15 @@
   <script>
     function openModal() { document.getElementById('loginModal').classList.add('active'); }
     function closeModal() { document.getElementById('loginModal').classList.remove('active'); }
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      btn.textContent = 'লগইন হচ্ছে...';
+      btn.style.opacity = '0.7';
+      setTimeout(() => {
+        window.location.href = 'admin.html';
+      }, 400);
+    }
   </script>
 </body>
 </html>
