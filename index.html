@@ -3,96 +3,236 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LanderOS — Premium E-Commerce & Landing Page Platform</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>LanderOS — Premium Landing Page Platform</title>
   <style>
-    body { font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif; }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.8);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .btn-github {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e2e8f0;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #34d399;
+    }
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.subtitle {
+      font-size: 1.125rem;
+      color: #94a3b8;
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.6);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+      text-align: left;
+    }
+    .card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.75rem;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #f1f5f9;
+    }
+    .card-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #64748b;
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white min-h-screen">
-  <!-- Navbar -->
-  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-black text-xl shadow-lg shadow-indigo-500/20">
-          ⚡
-        </div>
-        <div>
-          <span class="font-extrabold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-300">LanderOS</span>
-          <span class="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Live Cloud</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-4">
-        <a href="https://github.com/arglobal007/lander" target="_blank" class="text-sm font-medium text-slate-300 hover:text-white transition flex items-center gap-1.5">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub Repo
-        </a>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <span class="brand-title">LanderOS</span>
+        <span class="badge">Live Edge</span>
       </div>
     </div>
+    <a href="https://github.com/arglobal007/lander" target="_blank" class="btn-github">
+      🐙 GitHub Repository
+    </a>
   </header>
 
-  <!-- Hero Section -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-    <div class="text-center max-w-3xl mx-auto">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6 shadow-sm shadow-emerald-500/10">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Cloudflare Edge + Supabase Active
-      </div>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6">
-        সবার চেয়ে দ্রুত, আধুনিক ও পাওয়ারফুল <br>
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-          E-Commerce Landing Platform
-        </span>
-      </h1>
-      <p class="text-lg text-slate-300 font-normal leading-relaxed mb-8">
-        Cloudflare Global CDN, Supabase Cloud Database এবং ৩৬+ হাই-কনভার্টিং ল্যান্ডিং পেজ ফ্রেমওয়ার্ক সহ একটি স্বয়ংসম্পূর্ণ সিস্টেম।
-      </p>
-      
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="https://github.com/arglobal007/lander" target="_blank" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold shadow-lg shadow-indigo-500/25 transition transform hover:-translate-y-0.5">
-          🚀 GitHub Source Code
-        </a>
-      </div>
+  <main>
+    <div class="status-pill">
+      <div class="status-dot"></div>
+      <span>Cloudflare Edge + Supabase Live Active</span>
     </div>
 
-    <!-- Features Grid -->
-    <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50 backdrop-blur-sm">
-        <div class="text-3xl mb-4">🛡️</div>
-        <h3 class="text-lg font-bold text-white mb-2">Cloudflare SSL & DDoS</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          বিশ্বমানের Cloudflare Edge ক্যাশিং ও SSL সুরক্ষায় যুক্ত, যা প্রতিটি ভিজিটরের জন্য সুপারফাস্ট লোডিং নিশ্চিত করে।
-        </p>
+    <h1>
+      সবার চেয়ে দ্রুত ও আধুনিক <br>
+      <span class="gradient-text">E-Commerce Landing Platform</span>
+    </h1>
+
+    <p class="subtitle">
+      Cloudflare Global Anycast CDN, Supabase Cloud Database এবং ৩৬+ হাই-কনভার্টিং ল্যান্ডিং পেজ ফ্রেমওয়ার্ক সহ সফলভাবে লাইভ।
+    </p>
+
+    <a href="https://github.com/arglobal007/lander" target="_blank" class="cta-btn">
+      🚀 View Source Code on GitHub
+    </a>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">Cloudflare SSL & DDoS Protection</div>
+        <div class="card-desc">বিশ্বমানের Cloudflare Edge ক্যাশিং ও SSL সুরক্ষায় যুক্ত, যা যেকোনো ডিভাইস থেকে চোখের পলকে লোড হয়।</div>
       </div>
 
-      <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50 backdrop-blur-sm">
-        <div class="text-3xl mb-4">⚡</div>
-        <h3 class="text-lg font-bold text-white mb-2">Supabase Cloud Database</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          রিয়েল-টাইম অর্ডার ট্র্যাকিং, অটোমেটেড সিকিউরিটি এবং হাই-স্পিড REST/PostgreSQL ব্যাকএন্ড।
-        </p>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Supabase Cloud Database</div>
+        <div class="card-desc">রিয়েল-টাইম অর্ডার ট্র্যাকিং, অটোমেটেড সিকিউরিটি এবং হাই-স্পিড REST/PostgreSQL ব্যাকএন্ড।</div>
       </div>
 
-      <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700/50 backdrop-blur-sm">
-        <div class="text-3xl mb-4">📦</div>
-        <h3 class="text-lg font-bold text-white mb-2">৩৬+ রেডি ল্যান্ডিং পেজ</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          প্রডাক্ট বিক্রির জন্য অপ্টিমাইজড চেকআউট, পিক্সেল ট্র্যাকিং ও ইনস্ট্যান্ট অর্ডার প্রসেসিং সিস্টেম।
-        </p>
+      <div class="card">
+        <div class="card-icon">📦</div>
+        <div class="card-title">৩৬+ রেডি ল্যান্ডিং পেজ</div>
+        <div class="card-desc">প্রডাক্ট বিক্রির জন্য অপ্টিমাইজড চেকআউট, পিক্সেল ট্র্যাকিং ও ইনস্ট্যান্ট অর্ডার প্রসেসিং সিস্টেম।</div>
       </div>
     </div>
   </main>
 
-  <footer class="mt-20 border-t border-slate-800 py-8 text-center text-sm text-slate-500">
+  <footer>
     <p>© 2026 LanderOS • Connected to kintecay.store & Supabase</p>
   </footer>
 </body>
