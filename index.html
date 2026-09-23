@@ -3,269 +3,292 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LanderOS — Premium E-Commerce & Landing Platform</title>
+  <title>Kintecay Store — প্রিমিয়াম শপিং ও হট ডিলস</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(135deg, #090d16 0%, #111827 50%, #090d16 100%);
-      color: #f8fafc;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family: 'Hind Siliguri', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
     }
+    /* Top Bar */
+    .top-bar {
+      background: #0f172a; color: #e2e8f0; font-size: 0.82rem;
+      padding: 6px 1rem; text-align: center; font-weight: 500;
+    }
+    /* Header */
     header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(14px);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 40;
+      background: #ffffff; border-bottom: 1px solid #e2e8f0;
+      padding: 0.85rem 1.5rem; position: sticky; top: 0; z-index: 40;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-icon {
-      width: 42px; height: 42px; border-radius: 12px;
-      background: linear-gradient(135deg, #6366f1, #a855f7);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+    .header-container {
+      max-width: 1200px; margin: 0 auto; display: flex;
+      align-items: center; justify-content: space-between;
     }
-    .brand-title {
-      font-size: 1.35rem; font-weight: 800;
-      background: linear-gradient(to right, #ffffff, #cbd5e1);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-badge {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 900;
     }
-    .badge {
-      font-size: 0.72rem; padding: 3px 9px; border-radius: 9999px;
-      background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #a5b4fc; margin-left: 8px; font-weight: 600;
+    .logo-text { font-size: 1.35rem; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+    .logo-text span { color: #ef4444; }
+    .header-hotline {
+      display: flex; align-items: center; gap: 8px; font-weight: 700;
+      color: #0f172a; font-size: 0.95rem; text-decoration: none;
     }
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
-    .btn-login {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: #ffffff; padding: 9px 20px; border-radius: 10px;
-      font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer;
-      display: flex; align-items: center; gap: 8px;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
-      transition: all 0.2s;
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #ffffff; padding: 3.5rem 1.5rem; text-align: center;
     }
-    .btn-login:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5); }
-    main { flex: 1; max-width: 1150px; margin: 0 auto; padding: 3.5rem 1.5rem; text-align: center; }
-    .status-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 18px; border-radius: 9999px;
-      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35);
-      color: #34d399; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;
+    .hero-badge {
+      display: inline-block; background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444; color: #fca5a5; padding: 4px 14px;
+      border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;
     }
-    .status-dot { width: 8px; height: 8px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399; }
-    h1 { font-size: 2.8rem; font-weight: 800; line-height: 1.25; margin-bottom: 1.25rem; }
-    .gradient-text {
-      background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .hero h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .hero p { color: #cbd5e1; font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+    /* Features */
+    .features-row {
+      max-width: 1100px; margin: -1.5rem auto 2.5rem; padding: 0 1rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;
     }
-    p.subtitle { font-size: 1.15rem; color: #94a3b8; max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6; }
-    .portals-card {
-      background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px; padding: 2.5rem 2rem; margin: 2.5rem auto; max-width: 850px;
-      backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    .feat-card {
+      background: #ffffff; padding: 1.1rem; border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 12px;
     }
-    .portals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-    @media (max-width: 640px) { .portals-grid { grid-template-columns: 1fr; } }
-    .portal-box {
-      background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px; padding: 1.75rem; text-align: left; cursor: pointer;
-      transition: all 0.25s;
+    .feat-icon { font-size: 1.8rem; }
+    .feat-title { font-size: 0.95rem; font-weight: 700; color: #0f172a; }
+    .feat-sub { font-size: 0.78rem; color: #64748b; }
+    /* Products Section */
+    .main-container { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
+    .section-title { text-align: center; margin-bottom: 2rem; }
+    .section-title h2 { font-size: 1.8rem; font-weight: 800; color: #0f172a; }
+    .section-title p { color: #64748b; font-size: 0.95rem; }
+    .product-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
     }
-    .portal-box:hover {
-      transform: translateY(-4px); border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
+    .p-card {
+      background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0;
+      overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column;
     }
-    .portal-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
-    .portal-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.35rem; }
-    .portal-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.45; margin-bottom: 1rem; }
-    .portal-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.88rem; font-weight: 700; color: #818cf8; text-decoration: none;
+    .p-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    .p-img-box {
+      height: 200px; background: #f1f5f9; position: relative;
+      display: flex; align-items: center; justify-content: center; font-size: 3.5rem;
     }
-    /* Modal Styles */
+    .p-tag {
+      position: absolute; top: 10px; left: 10px; background: #ef4444;
+      color: #ffffff; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+    }
+    .p-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+    .p-title { font-size: 1.05rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+    .p-rating { color: #f59e0b; font-size: 0.8rem; margin-bottom: 10px; }
+    .p-price-row { display: flex; align-items: baseline; gap: 8px; margin-top: auto; margin-bottom: 12px; }
+    .p-price { font-size: 1.25rem; font-weight: 800; color: #ef4444; }
+    .p-old-price { font-size: 0.9rem; color: #94a3b8; text-decoration: line-through; }
+    .btn-order {
+      width: 100%; background: #0f172a; color: #ffffff; border: none;
+      padding: 10px; border-radius: 8px; font-weight: 700; font-size: 0.92rem;
+      cursor: pointer; transition: background 0.2s; text-align: center; text-decoration: none;
+    }
+    .btn-order:hover { background: #ef4444; }
+    /* Footer */
+    footer {
+      background: #0f172a; color: #94a3b8; padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center; font-size: 0.88rem;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 20px; margin: 1rem 0; flex-wrap: wrap; }
+    .footer-links a { color: #cbd5e1; text-decoration: none; font-size: 0.82rem; }
+    .footer-links a:hover { color: #ef4444; }
+    /* Staff Login Modal */
     .modal-overlay {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px);
       display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem;
     }
     .modal-overlay.active { display: flex; }
     .modal-box {
-      background: #111827; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px;
-      width: 100%; max-width: 440px; padding: 2rem; position: relative;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      background: #ffffff; border-radius: 16px; width: 100%; max-width: 400px;
+      padding: 2rem; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
     .modal-close {
-      position: absolute; top: 1.25rem; right: 1.25rem; background: transparent; border: none;
-      color: #94a3b8; font-size: 1.4rem; cursor: pointer;
+      position: absolute; top: 1rem; right: 1rem; background: transparent; border: none;
+      font-size: 1.4rem; cursor: pointer; color: #64748b;
     }
-    .tabs { display: flex; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 1.5rem; }
-    .tab-btn {
-      flex: 1; padding: 10px; background: transparent; border: none; border-bottom: 2px solid transparent;
-      color: #94a3b8; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-    }
-    .tab-btn.active { color: #818cf8; border-bottom-color: #818cf8; font-weight: 700; }
-    .form-group { margin-bottom: 1.25rem; text-align: left; }
-    .form-label { display: block; font-size: 0.85rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; }
     .form-input {
-      width: 100%; padding: 11px 14px; background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px;
-      color: #ffffff; font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+      margin-bottom: 1rem; font-size: 0.9rem; outline: none;
     }
-    .form-input:focus { border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2); }
     .form-submit {
-      width: 100%; padding: 12px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: #ffffff; border: none; border-radius: 10px; font-size: 0.95rem;
-      font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem;
+      width: 100%; background: #0f172a; color: #fff; padding: 11px;
+      border: none; border-radius: 8px; font-weight: 700; cursor: pointer;
     }
-    .form-submit:hover { opacity: 0.95; transform: translateY(-1px); }
-    footer { border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 1.5rem; text-align: center; font-size: 0.85rem; color: #64748b; }
   </style>
 </head>
 <body>
+  <div class="top-bar">
+    🔥 ধামাকা অফার! সারা বাংলাদেশে ক্যাশ অন ডেলিভারি এবং দ্রুততম হোম ডেলিভারি সুবিধা!
+  </div>
+
   <header>
-    <div class="brand">
-      <div class="brand-icon">⚡</div>
-      <div>
-        <span class="brand-title">LanderOS</span>
-        <span class="badge">Live Edge</span>
-      </div>
-    </div>
-    <div class="nav-actions">
-      <button onclick="openModal('admin')" class="btn-login">
-        🔐 Login Portal
-      </button>
+    <div class="header-container">
+      <a href="/" class="logo">
+        <div class="logo-badge">🛍️</div>
+        <div class="logo-text">কিনতে<span>চাই</span>.স্টোর</div>
+      </a>
+      <a href="tel:01700000000" class="header-hotline">
+        📞 হটলাইন: 01700-000000
+      </a>
     </div>
   </header>
 
-  <main>
-    <div class="status-pill">
-      <div class="status-dot"></div>
-      <span>Cloudflare Edge + Supabase Live Active</span>
-    </div>
+  <section class="hero">
+    <div class="hero-badge">✨ প্রিমিয়াম কোয়ালিটি পণ্য সম্ভার</div>
+    <h1>সেরা দামে অরিজিনাল প্রোডাক্ট কিনুন</h1>
+    <p>সরাসরি কারখানা থেকে বাছাইকৃত বেস্ট কোয়ালিটি পণ্য এখন আপনার হাতের মুঠোয়। পণ্য হাতে পেয়ে চেক করে মূল্য পরিশোধের ১০০% নিশ্চয়তা।</p>
+  </section>
 
-    <h1>
-      সবার চেয়ে দ্রুত ও আধুনিক <br>
-      <span class="gradient-text">E-Commerce Landing Platform</span>
-    </h1>
-
-    <p class="subtitle">
-      Cloudflare Global CDN, Supabase Cloud Database এবং ৩৬+ হাই-কনভার্টিং ল্যান্ডিং পেজ ফ্রেমওয়ার্ক সহ সফলভাবে লাইভ।
-    </p>
-
-    <!-- Admin / Employee Management Portal Cards -->
-    <div class="portals-card">
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;">ম্যানেজমেন্ট কন্ট্রোল সেন্টার</h2>
-      <p style="font-size: 0.92rem; color: #94a3b8;">আপনার ভূমিকা নির্বাচন করে সরাসরি ড্যাশবোর্ডে প্রবেশ করুন</p>
-      
-      <div class="portals-grid">
-        <!-- Admin Box -->
-        <div class="portal-box" onclick="openModal('admin')">
-          <div class="portal-icon">👑</div>
-          <div class="portal-title">অ্যাডমিন ড্যাশবোর্ড</div>
-          <div class="portal-desc">সমস্ত ল্যান্ডিং পেজ, অর্ডার ট্র্যাকিং, পিক্সেল এবং ফুল সিস্টেম সেটিংস পরিচালনা করুন।</div>
-          <div class="portal-btn">অ্যাডমিন লগইন করুন &rarr;</div>
-        </div>
-
-        <!-- Employee Box -->
-        <div class="portal-box" onclick="openModal('employee')">
-          <div class="portal-icon">💼</div>
-          <div class="portal-title">এমপ্লয়ি পোর্টাল</div>
-          <div class="portal-desc">অ্যাসাইন করা ল্যান্ডিং পেজের অর্ডার প্রসেসিং, কাস্টমার স্ট্যাটাস এবং ডেলিভারি আপডেট।</div>
-          <div class="portal-btn">এমপ্লয়ি লগইন করুন &rarr;</div>
-        </div>
+  <div class="features-row">
+    <div class="feat-card">
+      <div class="feat-icon">🚚</div>
+      <div>
+        <div class="feat-title">ফ্রি হোম ডেলিভারি</div>
+        <div class="feat-sub">সারাদেশে দ্রুত পৌঁছে দেওয়া হয়</div>
       </div>
     </div>
-  </main>
+    <div class="feat-card">
+      <div class="feat-icon">💵</div>
+      <div>
+        <div class="feat-title">ক্যাশ অন ডেলিভারি</div>
+        <div class="feat-sub">পণ্য দেখে মূল্য পরিশোধ করুন</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⭐</div>
+      <div>
+        <div class="feat-title">১০০% অরিজিনাল</div>
+        <div class="feat-sub">প্রিমিয়াম কোয়ালিটি গ্যারান্টি</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔄</div>
+      <div>
+        <div class="feat-title">সহজ রিটার্ন পলিসি</div>
+        <div class="feat-sub">৭ দিনের রিটার্ন সুবিধা</div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Login Modal -->
-  <div id="loginModal" class="modal-overlay" onclick="handleOverlayClick(event)">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-      
-      <div class="tabs">
-        <button id="adminTab" class="tab-btn active" onclick="switchTab('admin')">👑 Admin Login</button>
-        <button id="employeeTab" class="tab-btn" onclick="switchTab('employee')">💼 Employee Login</button>
+  <div class="main-container">
+    <div class="section-title">
+      <h2>🔥 আমাদের জনপ্রিয় প্রোডাক্ট সমূহ</h2>
+      <p>আপনার পছন্দের প্রোডাক্টটি বেছে নিয়ে সরাসরি অর্ডার করুন</p>
+    </div>
+
+    <div class="product-grid">
+      <!-- Product 1 -->
+      <div class="p-card">
+        <div class="p-img-box">
+          <span class="p-tag">হট ডিল</span>
+          👶
+        </div>
+        <div class="p-body">
+          <div class="p-title">বেবি ওয়াটারপ্রুফ স্কার্ট ডায়াপার</div>
+          <div class="p-rating">★★★★★ (১২০+ রিভিউ)</div>
+          <div class="p-price-row">
+            <span class="p-price">৳ ৬৯০</span>
+            <span class="p-old-price">৳ ৯৫০</span>
+          </div>
+          <button class="btn-order" onclick="alert('অর্ডার সম্পন্ন করতে আমাদের হটলাইনে কল করুন বা ফর্ম পূরণ করুন!')">সরাসরি অর্ডার করুন</button>
+        </div>
       </div>
 
-      <!-- Admin Form -->
-      <form id="adminForm" onsubmit="handleLogin(event, 'admin')">
-        <div class="form-group">
-          <label class="form-label">Admin Email</label>
-          <input type="email" id="adminEmail" class="form-input" placeholder="admin@example.com" required value="admin@example.com">
+      <!-- Product 2 -->
+      <div class="p-card">
+        <div class="p-img-box">
+          <span class="p-tag">বেস্ট সেলার</span>
+          🧵
         </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" id="adminPassword" class="form-input" placeholder="••••••••" required value="Admin@12345">
+        <div class="p-body">
+          <div class="p-title">হাতের কাজের প্রিমিয়াম নকশী কাঁথা</div>
+          <div class="p-rating">★★★★★ (৯৮+ রিভিউ)</div>
+          <div class="p-price-row">
+            <span class="p-price">৳ ৯৯৯</span>
+            <span class="p-old-price">৳ ১,৪৫০</span>
+          </div>
+          <button class="btn-order" onclick="alert('অর্ডার সম্পন্ন করতে আমাদের হটলাইনে কল করুন!')">সরাসরি অর্ডার করুন</button>
         </div>
-        <button type="submit" class="form-submit">ড্যাশবোর্ডে প্রবেশ করুন</button>
-      </form>
+      </div>
 
-      <!-- Employee Form -->
-      <form id="employeeForm" style="display: none;" onsubmit="handleLogin(event, 'employee')">
-        <div class="form-group">
-          <label class="form-label">Employee ID / Email</label>
-          <input type="text" id="employeeEmail" class="form-input" placeholder="emp-01 or email@domain.com" required>
+      <!-- Product 3 -->
+      <div class="p-card">
+        <div class="p-img-box">
+          <span class="p-tag">জনপ্রিয়</span>
+          🌿
         </div>
-        <div class="form-group">
-          <label class="form-label">Access PIN / Password</label>
-          <input type="password" id="employeePassword" class="form-input" placeholder="••••••••" required>
+        <div class="p-body">
+          <div class="p-title">১০০% পিওর হারবাল হেয়ার অয়েল</div>
+          <div class="p-rating">★★★★★ (১৫৫+ রিভিউ)</div>
+          <div class="p-price-row">
+            <span class="p-price">৳ ৮৫০</span>
+            <span class="p-old-price">৳ ১,২০০</span>
+          </div>
+          <button class="btn-order" onclick="alert('অর্ডার সম্পন্ন করতে আমাদের হটলাইনে কল করুন!')">সরাসরি অর্ডার করুন</button>
         </div>
-        <button type="submit" class="form-submit" style="background: linear-gradient(135deg, #059669, #10b981);">এমপ্লয়ি পোর্টালে প্রবেশ করুন</button>
-      </form>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="p-card">
+        <div class="p-img-box">
+          <span class="p-tag">প্রিমিয়াম</span>
+          🛌
+        </div>
+        <div class="p-body">
+          <div class="p-title">বেবি হেড শেপিং নরম পিলো</div>
+          <div class="p-rating">★★★★★ (৮৪+ রিভিউ)</div>
+          <div class="p-price-row">
+            <span class="p-price">৳ ৬৯০</span>
+            <span class="p-old-price">৳ ৮৯০</span>
+          </div>
+          <button class="btn-order" onclick="alert('অর্ডার সম্পন্ন করতে আমাদের হটলাইনে কল করুন!')">সরাসরি অর্ডার করুন</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <footer>
-    <p>© 2026 LanderOS • Connected to kintecay.store & Supabase</p>
+    <p>© 2026 কিনতেচাই.স্টোর (Kintecay.store) • সর্বস্বত্ব সংরক্ষিত</p>
+    <div class="footer-links">
+      <a href="javascript:void(0)">শর্তাবলী</a>
+      <a href="javascript:void(0)">প্রাইভেসি পলিসি</a>
+      <a href="javascript:void(0)">রিটার্ন পলিসি</a>
+      <a href="javascript:void(0)" onclick="openModal()" style="opacity: 0.6;">🔒 Staff Login</a>
+    </div>
   </footer>
 
-  <script>
-    function openModal(role) {
-      document.getElementById('loginModal').classList.add('active');
-      switchTab(role);
-    }
-    function closeModal() {
-      document.getElementById('loginModal').classList.remove('active');
-    }
-    function handleOverlayClick(e) {
-      if (e.target.id === 'loginModal') closeModal();
-    }
-    function switchTab(role) {
-      const adminTab = document.getElementById('adminTab');
-      const empTab = document.getElementById('employeeTab');
-      const adminForm = document.getElementById('adminForm');
-      const empForm = document.getElementById('employeeForm');
+  <!-- Staff / Admin Modal -->
+  <div id="loginModal" class="modal-overlay" onclick="if(event.target.id==='loginModal') closeModal()">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 1rem; color: #0f172a;">ম্যানেজমেন্ট লগইন</h3>
+      <form onsubmit="event.preventDefault(); alert('লগইন সফল হয়েছে! ড্যাশবোর্ডে রিডাইরেক্ট হচ্ছে...');">
+        <input type="text" class="form-input" placeholder="ইমেইল বা ইউজারনেম" required value="admin@example.com">
+        <input type="password" class="form-input" placeholder="পাসওয়ার্ড" required value="••••••••">
+        <button type="submit" class="form-submit">লগইন করুন</button>
+      </form>
+    </div>
+  </div>
 
-      if (role === 'admin') {
-        adminTab.classList.add('active');
-        empTab.classList.remove('active');
-        adminForm.style.display = 'block';
-        empForm.style.display = 'none';
-      } else {
-        empTab.classList.add('active');
-        adminTab.classList.remove('active');
-        empForm.style.display = 'block';
-        adminForm.style.display = 'none';
-      }
-    }
-    function handleLogin(e, role) {
-      e.preventDefault();
-      alert(role === 'admin' 
-        ? '👑 Admin Authentication Successful! Redirecting to dashboard...' 
-        : '💼 Employee Authentication Successful! Redirecting to orders...'
-      );
-    }
+  <script>
+    function openModal() { document.getElementById('loginModal').classList.add('active'); }
+    function closeModal() { document.getElementById('loginModal').classList.remove('active'); }
   </script>
 </body>
 </html>
